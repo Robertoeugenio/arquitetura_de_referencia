@@ -1,9 +1,10 @@
-package model;
+package model.tarefa;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.UsuarioDAO;
+import model.dao.UsuarioDAO;
+import model.javabean.Usuario;
 
 public class LoginTarefa implements Tarefa {
 

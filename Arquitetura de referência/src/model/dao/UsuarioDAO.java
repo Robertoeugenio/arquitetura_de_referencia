@@ -1,4 +1,4 @@
-package dao;
+package model.dao;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-import model.Usuario;
+import model.javabean.Usuario;
 
 public class UsuarioDAO implements DAO {
 

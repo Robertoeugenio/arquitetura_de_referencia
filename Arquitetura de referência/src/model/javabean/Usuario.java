@@ -1,4 +1,4 @@
-package model;
+package model.javabean;
 
 public class Usuario {
 	String nome;

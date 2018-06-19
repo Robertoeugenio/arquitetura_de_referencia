@@ -1,14 +1,15 @@
 package controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Tarefa;
-import model.FabricaDeTarefa;
+import model.tarefa.FabricaDeTarefa;
+import model.tarefa.Tarefa;
 
 @WebServlet("/frontcontroller/*")
 public class FrontController extends HttpServlet {

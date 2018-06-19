@@ -1,4 +1,4 @@
-package model;
+package model.tarefa;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +10,7 @@ public class FabricaDeTarefa {
 	static Map<String, Tarefa> tarefas = new HashMap<String, Tarefa>();
 	static {
 		tarefas.put("POST/login", new LoginTarefa());
-		tarefas.put("GET/logout", new LogoutAction());
+		tarefas.put("GET/logout", new LogoutTarefa());
 	}
 
 	public static Tarefa getTarefa(HttpServletRequest request) {
