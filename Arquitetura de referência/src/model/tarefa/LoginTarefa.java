@@ -10,7 +10,6 @@ public class LoginTarefa implements Tarefa {
 
 	@Override
 	public String executa(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("começo tarefa login");
 		String nomeUsuario = request.getParameter("usuario");
 		String senha = request.getParameter("senha");
 		Usuario usuario = new UsuarioDAO().busca(nomeUsuario, senha);

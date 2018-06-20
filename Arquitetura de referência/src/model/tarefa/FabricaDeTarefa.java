@@ -11,6 +11,8 @@ public class FabricaDeTarefa {
 	static {
 		tarefas.put("POST/login", new LoginTarefa());
 		tarefas.put("GET/logout", new LogoutTarefa());
+		tarefas.put("GET/exibeFormCadastroUsuario", new exibeFormCadastroUsuarioTarefa());
+		tarefas.put("POST/cadastrarUsuario", new cadastrarUsuario());
 	}
 
 	public static Tarefa getTarefa(HttpServletRequest request) {

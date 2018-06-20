@@ -49,8 +49,31 @@ public class UsuarioDAO implements DAO {
 
 	@Override
 	public void salvar(Object entidade) {
-		// TODO Auto-generated method stub
-
+		//conectar com sgbd
+		Connection con = FabricaDeConexoes.getConnection();
+		//montar a consulta
+		Statement stmt = null;
+		Usuario usuario = null;
+		try {
+			stmt = con.createStatement();
+			String sql = "insert into usuarios(nome,senha,usuario) values('"+((Usuario)entidade).getNome()+"','"+((Usuario)entidade).getSenha()+"','"+((Usuario)entidade).getNomeUsuario()+"');";
+			stmt.executeUpdate(sql);
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException se2) {
+				se2.printStackTrace();
+			}
+		}
 	}
 
 	@Override
