@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.dao.UsuarioDAO;
 import model.javabean.Usuario;
 
-public class cadastrarUsuario implements Tarefa {
+public class cadastrarUsuarioTarefa implements Tarefa {
 
 	@Override
 	public String executa(HttpServletRequest request, HttpServletResponse response) throws Exception {

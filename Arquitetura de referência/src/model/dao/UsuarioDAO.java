@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import model.javabean.Usuario;
@@ -84,8 +85,33 @@ public class UsuarioDAO implements DAO {
 
 	@Override
 	public List listarTodos() {
-		// TODO Auto-generated method stub
-		return null;
+		Connection con = FabricaDeConexoes.getConnection();
+		Statement stmt = null;
+		List<Usuario> usuarios = new ArrayList<Usuario>();
+		try {
+			stmt = con.createStatement();
+			String sql = "SELECT * FROM usuarios;";
+			ResultSet rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				usuarios.add(new Usuario(rs.getString("nome"),rs.getString("usuario"),rs.getString("senha")));
+			}
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException se2) {
+				se2.printStackTrace();
+			}
+		}
+		return usuarios;
 	}
 
 }

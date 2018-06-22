@@ -15,6 +15,7 @@
 			<h1>Olá ${usuario.nome}</h1>
 		<a href="logout">Logout</a>
 		<a href="exibeFormCadastroUsuario">Cadastrar novo usuário</a>
+		<a href="listarTodos">Listar todos</a>
 		</c:when>
 
 		<c:otherwise>
