@@ -44,20 +44,48 @@ public class UsuarioDAO implements DAO {
 
 	@Override
 	public Object recuperarPorId(Object id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void salvar(Object entidade) {
-		//conectar com sgbd
 		Connection con = FabricaDeConexoes.getConnection();
-		//montar a consulta
 		Statement stmt = null;
 		Usuario usuario = null;
 		try {
 			stmt = con.createStatement();
-			String sql = "insert into usuarios(nome,senha,usuario) values('"+((Usuario)entidade).getNome()+"','"+((Usuario)entidade).getSenha()+"','"+((Usuario)entidade).getNomeUsuario()+"');";
+			String sql = "SELECT * FROM usuarios where id='" + (String) id + "'";
+			ResultSet rs = stmt.executeQuery(sql);
+			if (rs.next()) {
+				usuario = new Usuario(rs.getInt("id"), rs.getString("nome"), rs.getString("usuario"),
+						rs.getString("senha"));
+			}
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException se2) {
+				se2.printStackTrace();
+			}
+		}
+		return usuario;
+	}
+
+	@Override
+	public void salvar(Object entidade) {
+		// conectar com sgbd
+		Connection con = FabricaDeConexoes.getConnection();
+		// montar a consulta
+		Statement stmt = null;
+		Usuario usuario = null;
+		try {
+			stmt = con.createStatement();
+			String sql = "insert into usuarios(nome,senha,usuario) values('" + ((Usuario) entidade).getNome() + "','"
+					+ ((Usuario) entidade).getSenha() + "','" + ((Usuario) entidade).getNomeUsuario() + "');";
+			System.out.println(sql);
 			stmt.executeUpdate(sql);
 		} catch (SQLException se) {
 			se.printStackTrace();
@@ -79,8 +107,31 @@ public class UsuarioDAO implements DAO {
 
 	@Override
 	public void excluir(Object id) {
-		// TODO Auto-generated method stub
-
+		// conectar com sgbd
+		Connection con = FabricaDeConexoes.getConnection();
+		// montar a consulta
+		Statement stmt = null;
+		try {
+			stmt = con.createStatement();
+			String sql = "delete from usuarios where id="+id;
+			System.out.println(sql);
+			stmt.executeUpdate(sql);
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException se2) {
+				se2.printStackTrace();
+			}
+		}
 	}
 
 	@Override
@@ -92,8 +143,9 @@ public class UsuarioDAO implements DAO {
 			stmt = con.createStatement();
 			String sql = "SELECT * FROM usuarios;";
 			ResultSet rs = stmt.executeQuery(sql);
-			while(rs.next()) {
-				usuarios.add(new Usuario(rs.getString("nome"),rs.getString("usuario"),rs.getString("senha")));
+			while (rs.next()) {
+				usuarios.add(new Usuario(rs.getInt("id"), rs.getString("nome"), rs.getString("usuario"),
+						rs.getString("senha")));
 			}
 		} catch (SQLException se) {
 			se.printStackTrace();
@@ -114,4 +166,36 @@ public class UsuarioDAO implements DAO {
 		return usuarios;
 	}
 
+	@Override
+	public void atualizar(Object entidade) {
+		// conectar com sgbd
+		Connection con = FabricaDeConexoes.getConnection();
+		// montar a consulta
+		Statement stmt = null;
+		try {
+			String nome = ((Usuario) entidade).getNome();
+			String senha = ((Usuario) entidade).getSenha();
+			String usuario = ((Usuario) entidade).getNomeUsuario();
+			int id = ((Usuario) entidade).getId();
+			stmt = con.createStatement();
+			String sql = "UPDATE usuarios" + " SET nome = '" + nome + "'," + " senha ='" + senha + "'," + " usuario = '"
+					+ usuario + "'" + " WHERE id = " + id;
+			stmt.executeUpdate(sql);
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException se2) {
+				se2.printStackTrace();
+			}
+		}
+	}
 }

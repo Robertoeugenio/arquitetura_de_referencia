@@ -1,20 +1,17 @@
 package model.tarefa;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.dao.UsuarioDAO;
-import model.javabean.Usuario;
 
-public class listarTodosTarefa implements Tarefa {
+public class ExcluirUsuarioTarefa implements Tarefa {
 
 	@Override
 	public String executa(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		List<Usuario> lista = new UsuarioDAO().listarTodos();
-		request.getSession().setAttribute("usuarios", lista);
-		return "listaUsuarios";
+		String id = request.getParameter("id");
+		new UsuarioDAO().excluir(id);
+		return "index";
 	}
 
 }

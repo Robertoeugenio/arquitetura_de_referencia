@@ -7,4 +7,5 @@ public interface DAO<E> {
 	public void salvar(E entidade);
 	public void excluir(Object id);
 	public List<E> listarTodos();
+	public void atualizar(E entidade);
 }

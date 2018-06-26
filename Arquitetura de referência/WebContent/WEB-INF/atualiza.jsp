@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Listar todos</title>
+<title>Insert title here</title>
 </head>
 <body>
 	<h1>Arquitetura de referência</h1>
@@ -21,36 +21,21 @@
 		<c:otherwise>
 			<c:if test="${erro != NULL}">${erro}</c:if>
 
-			<form action="login" method="post">
+			<form action="/sistema/frontcontroller/login" method="post">
 				Usuario:<input name="usuario"> Senha:<input name="senha">
 				<input type="submit" value="ok">
 			</form>
 		</c:otherwise>
 	</c:choose>
 	<hr>
-	<table border=1>
-		<thead>
-			<th>Nome</th>
-			<th>Usuario</th>
-			<th>Senha</th>
-			<th>Ações</th>
-		</thead>
-		<tbody>
-			<c:forEach var="u" items="${usuarios}">
-				<tr>
-					<td>${u.nome}</td>
-					<td>${u.nomeUsuario}</td>
-					<td>${u.senha}</td>
-					<td><a href="atualizar?id=${u.id}">Atualizar</a><a href="excluir?id=${u.id}">Excluir</a></td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
+	<c:if test="${!empty usuario }">
+		<form action="atualizar" method="POST">
+			<input type="hidden" name="id" value="${entidade.id}"> Usuario:<input
+				name="usuario" value="${entidade.nomeUsuario}"> Senha:<input
+				name="senha" value="${entidade.senha}"> Nome completo: <input
+				name="nome" value="${entidade.nome}"> <input type="submit"
+				value="Atualizar">
+		</form>
+	</c:if>
 </body>
 </html>
-
-
-
-
-
-
