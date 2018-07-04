@@ -18,14 +18,8 @@ public class LoginTarefa implements Tarefa {
 			request.getSession().setAttribute("usuario", usuario);
 			return "index";
 		} else {
-			request.setAttribute("erro", "Nome de usu·rio/senha errado. Tente novamente.");
+			request.setAttribute("erro", "Nome de usu√°rio/senha errado. Tente novamente.");
 			return "index";
 		}
-	}
-
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return "Tarefa Login";
 	}
 }
